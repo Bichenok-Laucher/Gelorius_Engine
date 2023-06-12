@@ -20,6 +20,16 @@
 
 using namespace graphics;
 
+GLfloat x1 = 0.0f;  
+GLfloat y1 = 0.0f;
+GLfloat rsize = 25;
+
+GLfloat xstep = 1.0f;
+GLfloat ystep = 1.0f;
+
+GLfloat windowWidth;
+GLfloat windowHeight;
+
 namespace engine
 {
 
@@ -2520,4 +2530,205 @@ class GamePadXBox {
 }
 
 
+}
+
+GLfloat rsize = 25;
+
+const RenderScene(void) {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glRectf(x1,y1,x1+rsize,y1-rsize);
+    glutSwapBuffers();
+}
+
+void SetupRC(void) {
+    glClearColor(0.0f,0.0f,1.0f,1.0f);
+}
+
+void ChangeSize(GLsizei w, GLsizei h) {
+    GLfloat aspectRatio;
+    if (h == 0) {
+        h = 1;
+    }
+    glViewport(0,0,w,h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    aspectRatio = (GLfloat)w / (GLfloat)h;
+
+    if (w <= h) {
+        windowWidth = 100;
+        windowHeight = 100 / aspectRatio;
+        glOrtho(-100.0,100.0,-windowHeight,windowHeight, 1.0,-1.0);
+    } else {
+        windowWidth = 100 * aspectRatio;
+        windowHeight = 100;
+        glOrtho(-windowWidth,windowHeight,-100.0,100.0,1.0-1.0);
+    }
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+}
+
+void TimerFunction(int value){
+    if (x1 > windowWidth - rsize || x1 < -windowWidth)  
+        xstep = -xstep;
+    if (y1 > windowHeight || y1 < -windowHeight + rsize)  
+        ystep = -ystep;
+    x1 += xstep;   
+    y1 += ystep;
+    if (x1 > (windowWidth-rsize+xstep))   
+        x1 = windowWidth-rsize-1;
+    else if (x1 < -(windowWidth + xstep))  
+        x1 = -windowWidth - 1;
+    if (y1 > (windowHeight+ystep))   
+        y1 = windowHeight-1;
+    else if(y1 < -(windowHeight-rsize+ystep))
+        y1 = -windowHeight+rsize-1;
+    glutPostRedisplay(); 
+    glutTimerFunc(33,TimerFunction,1);  
+
+            for (i = 1.17; i < 1.97; i += 0.001)
+        {
+            x = 400 * cos(i);
+            y = -150 + 300 * sin(i);
+            glVertex2i(x, y);
+            glVertex2i(x / 2 - 600 * cos(j), y / 2 - 100 * sin(j));
+        }
+         
+        for (i = 1.07; i < 2.07; i += 0.001)
+        {
+            x = 400 * cos(i);
+            y = -200 + 300 * sin(i);
+            glVertex2i(x, y);
+            glVertex2i(x / 2 - 600 * cos(j), y / 2 - 100 * sin(j));
+        }
+         
+        for (i = 1.05; i < 2.09; i += 0.001)
+        {
+            x = 400 * cos(i);
+            y = -250 + 300 * sin(i);
+            glVertex2i(x, y);
+            glVertex2i(x / 2 - 600 * cos(j), y / 2 - 100 * sin(j));
+        }
+         
+        for (i = 1.06; i < 2.08; i += 0.001)
+        {
+            x = 400 * cos(i);
+            y = -300 + 300 * sin(i);
+            glVertex2i(x, y);
+            glVertex2i(x / 2 - 600 * cos(j), y / 2 - 100 * sin(j));
+        }
+         
+        for (i = 1.10; i < 2.04; i += 0.001)
+        {
+            x = 400 * cos(i);
+            y = -350 + 300 * sin(i);
+            glVertex2i(x, y);
+            glVertex2i(x / 2 - 600 * cos(j), y / 2 - 100 * sin(j));
+        }
+         
+        for (i = 1.16; i < 1.98; i += 0.001)
+        {
+            x = 400 * cos(i);
+            y = -400 + 300 * sin(i);
+            glVertex2i(x, y);
+            glVertex2i(x / 2 - 600 * cos(j), y / 2 - 100 * sin(j));
+        }
+         
+        for (i = 1.27; i < 1.87; i += 0.001)
+        {
+            x = 400 * cos(i);
+            y = -450 + 300 * sin(i);
+            glVertex2i(x, y);
+            glVertex2i(x / 2 - 600 * cos(j), y / 2 - 100 * sin(j));
+        }
+
+        for (i = 200; i >=- 200; i--)
+        {
+            glVertex2i(0, i);
+            glVertex2i(-600 * cos(j), i / 2 - 100 * sin(j));
+        }
+         
+        for (i = 0;i < 6.29; i += 0.001)
+        {
+            x = 70 * cos(i);
+            y = 200 * sin(i);
+            glVertex2i(x, y);
+            glVertex2i(x / 2 - 600 * cos(j), y / 2 - 100 * sin(j));
+        }
+         
+        for (i = 0; i < 6.29; i += 0.001)
+        {
+            x = 120 * cos(i);
+            y = 200 * sin(i);
+            glVertex2i(x, y);
+            glVertex2i(x / 2 - 600 * cos(j), y / 2 - 100 * sin(j));
+        }
+         
+        for (i = 0; i < 6.29; i += 0.001)
+        {
+            x = 160 * cos(i);
+            y = 200 * sin(i);
+            glVertex2i(x, y);
+            glVertex2i(x / 2 - 600 * cos(j), y / 2 - 100 * sin(j));
+        }
+
+        for (i = 0; i < 6.29; i += 0.001)
+        {
+            x = 600 * cos(i);
+            y = 100 * sin(i);
+            glVertex2i(x, y);
+        }
+
+        Hitbox::Hitbox(glm::vec2 customSize, glm::vec2 customPosition)
+            : size(customSize), position(customPosition) {}
+
+        bool Hitbox::intersects(
+            Hitbox * obj,
+            const glm::vec2 & obj1_position,
+            const glm::vec2 & obj2_position,
+            const glm::vec2 & obj1_size,
+            const glm::vec2 & obj2_size) {
+
+		    float obj_1_left = obj1_position.x + obj1_size.x * position.x - (obj1_size.x * size.x / 2);
+		    float obj_2_left = obj2_position.x + obj2_size.x * obj->position.x - (obj2_size.x * obj->size.x / 2);
+
+		    float obj_1_right = obj_1_left + obj1_size.x * size.x;
+		    float obj_2_right = obj_2_left + obj2_size.x * obj->size.x;
+
+		    float obj_1_bottom = obj1_position.y + obj1_size.y * position.y - (obj1_size.y * size.y / 2);
+		    float obj_2_bottom = obj2_position.y + obj2_size.y * obj->position.y - (obj2_size.y * obj->size.y / 2);
+
+		    float obj_1_top = obj_1_bottom + obj1_size.y * size.y;
+		    float obj_2_top = obj_2_bottom + obj2_size.y * obj->size.y;
+
+		    return !(
+			    obj_1_left > obj_2_right ||
+		    	obj_1_right < obj_2_left ||
+		    	obj_1_top < obj_2_bottom ||
+		    	obj_1_bottom > obj_2_top
+	    		);
+          }
+
+    	void Hitbox::resolve(Hitbox * obj, glm::vec2 & obj1_position, glm::vec2 obj2_position) {
+
+		obj1_position += glm::vec2(
+			((obj1_position.x + position.x + size.x / 2) - (obj2_position.x - obj->position.x + obj->size.x / 2)) * 0.1f,
+			((obj1_position.y + position.y + size.y / 2) - (obj2_position.y - obj->position.y + obj->size.y / 2)) * 0.1f
+		);
+
+	}    
+}
+
+class Hitbox {
+public:
+
+    glm::vec2 position;
+
+    glm::vec2 size;
+
+    Hitbox(glm::vec2 custinSize, glm::vec2 customPosition);
+
+    bool intersects(Hitbox * obj, const glm::vec2 & obj1_position, const glm::vec2 & obj2_position, const glm::vec2 & obj1_size, const glm::vec2 & obj2_size);
+
+    void resolve(Hitbox * obj, glm::vec2 & obj1_position, glm::vec2 obj2_position);
 }
